@@ -3,7 +3,7 @@ import React from 'react'
 const Info = () => {
     return (
         <div className='bg-slate-100 -mt-20 flex flex-col justify-center items-center pb-20'>
-            <div className='flex flex-col pt-48 mb-20 w-full lg:flex lg:flex-col lg:justify-center lg:items-center '>
+            <div className='flex flex-col mt-48 mb-20 w-full lg:flex lg:flex-col lg:justify-center lg:items-center '>
                 <h2 className='font-bold text-2xl lg:text-4xl text-dark-violet mb-4 text-center w-full'>Advanced Statistics</h2>
                 <p className='text-grayish-violet text-center text-base lg:text-lg lg:w-1/2'>Track how your links are performing across the web with our
                     advanced statistics dashboard.</p>

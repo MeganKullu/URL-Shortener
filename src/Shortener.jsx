@@ -6,6 +6,13 @@ const Shortener = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [copied, setCopied] = useState(false);
 
+  useEffect(() => {
+    const storedLinks = localStorage.getItem('shortenedLinks');
+    if (storedLinks) {
+      setShortenedLinks(JSON.parse(storedLinks));
+    }
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -20,31 +27,28 @@ const Shortener = () => {
 
       if (data.ok) {
         const newLink = { original: inputValue, shortened: data.result.short_link };
-        setShortenedLinks([...shortenedLinks, newLink]);
-        setInputValue('');
-        setErrorMessage('');
+        setShortenedLinks((prevLinks) => [...prevLinks, newLink]);
+        setInputValue("");
+        setErrorMessage("");
+        setCopied(false); // Reset the copied state for the new link
+
+        // Save the updated list to local storage
+        localStorage.setItem('shortenedLinks', JSON.stringify([...shortenedLinks, newLink]));
       } else {
-        setErrorMessage('Failed to shorten the URL. Please try again.');
+        setErrorMessage('Failed to shorten the URL. Please try again.')
       }
+
     } catch (error) {
       console.error(error);
-      setErrorMessage("An error occurred. Please try again.");
+      setErrorMessage("An error occurred. Please try again.")
     }
-  };
-
-  useEffect(() => {
-    const storedLinks = localStorage.getItem('shortenedLinks');
-    if (storedLinks) {
-      setShortenedLinks(JSON.parse(storedLinks));
-    }
-  }, []);
-
+  }
 
   const handleCopy = (textToCopy) => {
     navigator.clipboard.writeText(textToCopy)
       .then(() => setCopied(true))
-      .catch((error) => console.error("Error copying to clipboard:", error));
-  };
+      .catch((error) => alert("Error copying to clipboard:", error));
+  }
 
   return (
     <div className='lg:flex lg:w-full lg:justify-center lg:items-center lg:flex-col lg:px-28 px-5'>
@@ -62,7 +66,7 @@ const Shortener = () => {
       </form>
 
       {shortenedLinks.length > 0 && (
-        <div className='flex justify-center mt-8'>
+        <div className='flex justify-center mt-8 z-50'>
           {shortenedLinks.map((link, index) => (
             <div key={index} className='flex py-3 px-4 text-sm bg-white justify-between w-10/12 mt-4 items-center absolute mx-auto'>
               <div className='text-black'>{link.original}</div>
@@ -72,7 +76,7 @@ const Shortener = () => {
                   className={`py-1 px-2 rounded-lg ${copied ? 'bg-dark-violet text-white' : 'bg-cyan text-white'}`}
                   onClick={() => handleCopy(link.shortened)}
                 >
-                  {copied ? 'Copied' : 'Copy'}
+                  {copied ? 'Copied!' : 'Copy'}
                 </button>
               </div>
             </div>
