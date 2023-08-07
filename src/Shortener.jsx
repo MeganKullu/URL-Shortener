@@ -8,6 +8,7 @@ const Shortener = () => {
 
   useEffect(() => {
     const storedLinks = localStorage.getItem('shortenedLinks');
+    console.log(storedLinks);
     if (storedLinks) {
       setShortenedLinks(JSON.parse(storedLinks));
     }
@@ -51,7 +52,8 @@ const Shortener = () => {
   }
 
   return (
-    <div className='lg:flex lg:w-full lg:justify-center lg:items-center lg:flex-col lg:px-28 px-5'>
+    <>
+    <div className='lg:relative z-50 w-full lg:w-full lg:justify-center lg:items-center lg:flex-col lg:px-28 px-5'>
       <form onSubmit={handleSubmit} className='p-4 lg:py-8 lg:px-10 rounded-xl lg:rounded-lg bg-dark-violet lg:bg-[url("./images/bg-shorten-desktop.svg")] bg-[url("./images/bg-shorten-mobile.svg")] flex flex-col lg:flex-row lg:gap-4 place-content-between h-40 lg:h-32 mt-12 relative z-50 w-full'>
         <input
           type="text"
@@ -64,28 +66,31 @@ const Shortener = () => {
           Shorten It!
         </button>
       </form>
-
+    
+    </div>
       {shortenedLinks.length > 0 && (
-        <div className='flex justify-center mt-8 z-50'>
-          {shortenedLinks.map((link, index) => (
-            <div key={index} className='flex py-3 px-4 text-sm bg-white justify-between w-10/12 mt-4 items-center absolute mx-auto'>
-              <div className='text-black'>{link.original}</div>
-              <div className='flex place-content-end items-center gap-4'>
-                <div className='text-cyan'>{link.shortened}</div>
-                <button
-                  className={`py-1 px-2 rounded-lg ${copied ? 'bg-dark-violet text-white' : 'bg-cyan text-white'}`}
+        
+          shortenedLinks.map((link, index) => (
+            <div key={index} className='lg:flex z-50 lg:py-3 lg:px-4 text-base lg:text-sm bg-white justify-between w-full mt-6 items-start lg:items-center  mx-auto rounded-xl'>
+              <div className='text-black w-full flex py-2 lg:py-0 px-2 lg:px-0 flex-wrap border-b lg:border-none'>{link.original}</div>
+              <div className=' w-full lg:flex place-content-end items-start lg:items-center lg:gap-4'>
+                <div className='text-cyan flex w-full py-2 lg:py-0 px-2 lg:px-0'>{link.shortened}</div>
+                <div className='flex w-full items-center py-2 lg:py-0 px-2 lg:px-0'>
+                  <button
+                  className={`py-3 lg:py-1 lg:px-2 w-full rounded-lg flex text-center justify-center ${copied ? 'bg-dark-violet text-white' : 'bg-cyan text-white'}`}
                   onClick={() => handleCopy(link.shortened)}
                 >
                   {copied ? 'Copied!' : 'Copy'}
                 </button>
+                </div>
               </div>
             </div>
-          ))}
-        </div>
+          ))
+      
       )}
 
       {errorMessage && <p className='text-red'>{errorMessage}</p>}
-    </div>
+    </>
   );
 };
 
