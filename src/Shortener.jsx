@@ -81,7 +81,7 @@ const Shortener = () => {
           <div className='relative z-50 mt-20 mx-5 w-full'>
             {shortenedLinks.map((link, index) => (
               <div key={index} className='lg:flex z-50 lg:py-3 lg:px-4 text-base lg:text-sm bg-white justify-center lg:justify-between mt-6 items-start lg:items-center mx-5 lg:mx-28 rounded-lg'>
-                <div className='text-black w-full flex py-4 lg:py-0 px-3 lg:px-0 flex-wrap border-b border-gray lg:border-none truncate ...'>{link.original}</div>
+                <p className='text-black w-full flex py-4 lg:py-0 px-3 lg:px-0 flex-wrap border-b border-gray lg:border-none truncate ...'>{link.original}</p>
                 <div className=' w-full lg:flex place-content-end items-start lg:items-center lg:gap-4'>
                   <div className='text-cyan flex lg:justify-end w-full py-4 lg:py-0 px-3 lg:px-0 '>{link.shortened}</div>
                   <div className='flex w-full lg:w-20 items-center py-2 lg:py-0 px-3 lg:px-0'>
