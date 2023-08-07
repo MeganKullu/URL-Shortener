@@ -59,7 +59,7 @@ function Header() {
 
           <div className='flex flex-col lg:flex lg:flex-col lg:h-full  lg:pt-28'>
             <p className='text-4xl lg:text-7xl font-extrabold text-center lg:text-left text-very-dark-blue mb-2 lg:mb-3 mt-2 px-5 lg:px-0'>More than just shorter links</p>
-            <p className="text-base lg:text-lg text-center lg:text-left text-gray mb-6 lg:mb-8">Build your brand's recognition and get detailed insights on how your links are performing.</p>
+            <p className="text-base lg:text-lg text-center lg:text-left text-gray mb-6 mx-4 lg:mx-0 lg:mb-8">Build your brand's recognition and get detailed insights on how your links are performing.</p>
             <button className='text-white text-bold text-lg bg-cyan rounded-full py-2 px-4 hover:bg-dark-violet w-1/2 self-center lg:self-start'>Get Started</button>
           </div>
         </div>
